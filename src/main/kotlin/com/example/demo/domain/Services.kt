@@ -16,5 +16,5 @@ interface UserRepo {
 suspend fun <R> R.createUser(user: User): Either<Throwable, Long> where R : UserRepo =
         either {
             val newUser = evalOn(Dispatchers.IO) {!create(user)}
-            newUser.id ?: throw IllegalArgumentException("id was not generated")
+            newUser.id
         }
